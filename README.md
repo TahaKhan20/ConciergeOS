@@ -1,2 +1,3 @@
-# ReceptionOS
-ReceptionOS is an AI-powered business automation platform that provides intelligent voice and chat receptionists, CRM integration, custom AI-powered CRM development, appointment booking, lead qualification, and workflow automation to help businesses improve customer engagement and streamline operations.
+# ConciergeOS
+ConciergeOS is an AI-powered business automation platform for the hospitality industry, including restaurants, hotels, apartments, vacation rentals, and other booking-based businesses. It provides AI voice and chat receptionists, reservation and appointment booking, CRM integration, custom AI CRM development, lead qualification, and workflow automation to enhance guest experiences, streamline operations, and increase bookings.
+
