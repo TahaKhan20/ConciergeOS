@@ -3059,19 +3059,47 @@ function applyTheme(theme) {
         if (mobileTheme) mobileTheme.innerHTML = "🌙";
     }
 
-    // 2. NEW: Dynamically update OpenAI Chatkit theme if it is initialized
+    // 2. Safely re-apply the FULL options block to OpenAI Chatkit
     const chat = document.getElementById("chat");
     if (chat && typeof chat.setOptions === "function") {
         chat.setOptions({
+            api: {
+                url: 'https://openai.secondbrainos.com/chatkit',
+                domainKey: 'domain_pk_6a548ff4ce248197a246458c6713e8c70dadf08d8f890c9d',
+                fetch: (url, options = {}) => {
+                    return fetch(url, {
+                        ...options,
+                        headers: {
+                            ...options.headers,
+                            'X-Domain-Key': 'domain_pk_6a548ff4ce248197a246458c6713e8c70dadf08d8f890c9d',
+                        },
+                    });
+                },
+            },
             theme: {
-                colorScheme: theme // passes 'light' or 'dark'
+                colorScheme: theme, // Dynamically changes to 'light' or 'dark'
+                color: {
+                    accent: { primary: '#4F46E5', level: 2 },
+                },
+                radius: 'round',
+                density: 'spacious',
+            },
+            startScreen: {
+                greeting: 'Welcome to ConciergeOS! I’m your AI concierge. I can help with reservations, bookings, guest inquiries, customer support, and business automation. How can I assist you today?',
+                prompts: [
+                    { label: 'Book a Reservation', prompt: 'I would like to make a reservation.' },
+                    { label: 'Ask a Question', prompt: 'I have a question about your services.' },
+                    { label: 'Business Automation', prompt: 'Tell me how ConciergeOS can automate my business.' }
+                ]
+            },
+            composer: {
+                placeholder: 'Ask about reservations, AI automation, or customer support...'
             }
         });
     }
 
     localStorage.setItem("theme", theme);
 }
-
 document.addEventListener("DOMContentLoaded", () => {
     const savedTheme = localStorage.getItem("theme") || "light";
     applyTheme(savedTheme);
