@@ -2297,68 +2297,106 @@ color:#CBD5E1;
                                 <openai-chatkit class="chatkit" id="chat" >
                                 </openai-chatkit>
                                 <script>
-                                    const DOMAIN_KEY = 'domain_pk_6a548ff4ce248197a246458c6713e8c70dadf08d8f890c9d'; // Replace with your actual domain key
-                                    const API_URL = 'https://openai.secondbrainos.com/chatkit';
+                                    const DOMAIN_KEY = "domain_pk_6a548ff4ce248197a246458c6713e8c70dadf08d8f890c9d";
+                                    const API_URL = "https://openai.secondbrainos.com/chatkit";
 
-                                    const customFetch = (url, options = {}) => {
-                                        return fetch(url, {
-                                        ...options,
-                                        headers: {
-                                            ...options.headers,
-                                            'X-Domain-Key': DOMAIN_KEY,
-                                        },
-                                        });
-                                    };
+                                    const chat = document.getElementById("chat");
 
+                                    // Initialize ChatKit
                                     function initChatKit() {
-                                        const kit = document.querySelector('openai-chatkit');
+                                        if (!chat || !chat.setOptions) return;
 
-                                        if (kit && kit.setOptions) {
-                                        kit.setOptions({
+                                        chat.setOptions({
                                             api: {
-                                            url: API_URL,
-                                            domainKey: DOMAIN_KEY,
-                                            fetch: customFetch,
+                                                url: API_URL,
+                                                domainKey: DOMAIN_KEY
                                             },
+
                                             theme: {
-                                            colorScheme: 'light',
-                                            color: {
-                                                accent: { primary: '#4F46E5', level: 2 },
-                                            },
-                                            radius: 'round',
-                                            density: 'spacious',
-                                            },
-                                            startScreen: {
-                                                greeting: 'Welcome to ConciergeOS! I’m your AI concierge. I can help with reservations, bookings, guest inquiries, customer support, and business automation. How can I assist you today?',
-                                                prompts: [
-                                                {
-                                                    label: 'Book a Reservation',
-                                                    prompt: 'I would like to make a reservation.',
-                                                
+                                                colorScheme: document.documentElement.classList.contains("dark")
+                                                    ? "dark"
+                                                    : "light",
+
+                                                color: {
+                                                    accent: {
+                                                        primary: "#4F46E5",
+                                                        level: 2
+                                                    }
                                                 },
-                                                {
-                                                    label: 'Ask a Question',
-                                                    prompt: 'I have a question about your services.',
-                                                
-                                                },
-                                                {
-                                                    label: 'Business Automation',
-                                                    prompt: 'Tell me how ConciergeOS can automate my business.',
-                                                
+
+                                                radius: "round",
+
+                                                density: "compact",
+
+                                                typography: {
+                                                    fontFamily: "'Inter', sans-serif"
                                                 }
+                                            },
+
+                                            startScreen: {
+                                                greeting:
+                                                    "Hi! I can help you book, reschedule, or cancel appointments. What would you like to do?",
+                                                prompts: [
+                                                    {
+                                                        label: "Book an appointment",
+                                                        prompt: "I want to book an appointment",
+                                                        icon: "calendar"
+                                                    },
+                                                    {
+                                                        label: "Check availability",
+                                                        prompt: "What times are available?",
+                                                        icon: "clock"
+                                                    },
+                                                    {
+                                                        label: "Reschedule",
+                                                        prompt: "I need to reschedule my appointment",
+                                                        icon: "reload"
+                                                    }
                                                 ]
                                             },
+
                                             composer: {
-                                                placeholder: 'Ask about reservations, AI automation, or customer support...'
+                                                placeholder: "Ask me about scheduling..."
                                             }
                                         });
-                                        } else {
-                                        setTimeout(initChatKit, 50);
-                                        }
                                     }
 
-                                    initChatKit();
-                                </script>
+                                    // Update only the theme
+                                    function applyChatkitTheme() {
+                                        const chat = document.getElementById("chat");
+
+                                        if (!chat || typeof chat.setOptions !== "function") {
+                                            return;
+                                        }
+
+                                        chat.setOptions({
+                                            theme: {
+                                                colorScheme: document.documentElement.classList.contains("dark")
+                                                    ? "dark"
+                                                    : "light",
+
+                                                color: {
+                                                    accent: {
+                                                        primary: "#4F46E5",
+                                                        level: 2
+                                                    }
+                                                },
+
+                                                radius: "round",
+
+                                                density: "compact",
+
+                                                typography: {
+                                                    fontFamily: "'Inter', sans-serif"
+                                                }
+                                            }
+                                        });
+                                    }
+                                    // Wait until ChatKit is ready
+                                    customElements.whenDefined("openai-chatkit").then(() => {
+                                        initChatKit();
+                                    });
+                                    </script>
 
 
                     </div>
@@ -2420,21 +2458,7 @@ color:#CBD5E1;
 <!-- Calendly -->
 
 <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-<script>
-    const chat = document.getElementById("chat");
 
-    function applyTheme() {
-        const isDark = document.documentElement.classList.contains("dark");
-
-        chat.setOptions({
-            theme: {
-                colorScheme: isDark ? "dark" : "light"
-            }
-        });
-    }
-
-    applyTheme();
-</script>
 <style>
 
 /* ==========================================================
@@ -3074,11 +3098,17 @@ function applyTheme(theme) {
     }
 
     localStorage.setItem("theme", theme);
+
+    // Keep ChatKit in sync with the website theme
+    applyChatkitTheme();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     const savedTheme = localStorage.getItem("theme") || "light";
-    applyTheme(savedTheme);
+
+    customElements.whenDefined("openai-chatkit").then(() => {
+        applyTheme(savedTheme);
+    });
 
     const themeToggle = document.getElementById("themeToggle");
     const mobileTheme = document.getElementById("mobileTheme");
@@ -3103,6 +3133,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     }
 });
+
 </script>
 </body>
 </html>
