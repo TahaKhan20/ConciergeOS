@@ -1594,7 +1594,7 @@ color:#CBD5E1;
 
 </h2>
 
-<p class="mt-8 max-w-4xl mx-auto text-white text-xl leading-9 text-slate-600 dark:text-slate-400">
+<p class="mt-8 max-w-4xl mx-auto text-white text-xl leading-9 text-slate-600 dark:text-slate-200">
 
     ConciergeOS integrates with your CRM, calendars, phone system, email and business tools.
 
@@ -2294,7 +2294,7 @@ color:#CBD5E1;
 
                         <!-- Replace this with your AI widget -->
 
-                                <openai-chatkit class="chatkit dark.bg-slate-950" id="chat" >
+                                <openai-chatkit class="chatkit" id="chat" >
                                 </openai-chatkit>
                                 <script>
                                     const DOMAIN_KEY = 'domain_pk_6a548ff4ce248197a246458c6713e8c70dadf08d8f890c9d'; // Replace with your actual domain key
@@ -2359,6 +2359,30 @@ color:#CBD5E1;
                                     }
 
                                     initChatKit();
+
+                                        function customizeChatKit() {
+                                            const chat = document.querySelector("openai-chatkit");
+
+                                            if (!chat?.shadowRoot) {
+                                                return setTimeout(customizeChatKit, 100);
+                                            }
+
+                                            const style = document.createElement("style");
+                                            style.textContent = `
+                                                .bg-slate-950,
+                                                .bg-slate-900 {
+                                                    background: #03081b !important;
+                                                }
+
+                                                [class*="bg-slate"] {
+                                                    background: #03081b !important;
+                                                }
+                                            `;
+
+                                            chat.shadowRoot.appendChild(style);
+                                        }
+
+                                        customizeChatKit();
                                 </script>
 
 
