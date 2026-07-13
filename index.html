@@ -2313,43 +2313,51 @@ color:#CBD5E1;
                                     function initChatKit() {
                                         const kit = document.querySelector('openai-chatkit');
 
-                                        console.log(kit);
-                                        console.log(typeof kit.setOptions);
-                                        console.log(customElements.get("openai-chatkit"));
-
                                         if (kit && kit.setOptions) {
-                                        kit.setOptions({
-                                            api: {
-                                            url: API_URL,
-                                            domainKey: DOMAIN_KEY,
-                                            fetch: customFetch,
-                                            },
-                                            theme: {
-                                            colorScheme: 'light',
-                                            color: {
-                                                accent: { primary: '#4F46E5', level: 2 },
-                                            },
-                                            radius: 'round',
-                                            density: 'spacious',
-                                            },
-                                            startScreen: {
-                                            greeting: 'Hi! I can help you book, reschedule, or cancel appointments. What would you like to do?',
-                                            prompts: [
-                                                { label: 'Book an appointment', prompt: 'I want to book an appointment', icon: 'calendar' },
-                                                { label: 'Check availability', prompt: 'What times are available?', icon: 'clock' },
-                                                { label: 'Reschedule', prompt: 'I need to reschedule my appointment', icon: 'reload' }
-                                            ]
-                                            },
-                                            composer: {
-                                            placeholder: 'Ask me about scheduling...'
-                                            }
-                                        });
+                                            kit.setOptions({
+                                                api: {
+                                                    url: API_URL,
+                                                    domainKey: DOMAIN_KEY,
+                                                    fetch: customFetch,
+                                                },
+                                                theme: {
+                                                    colorScheme: 'light',
+                                                    color: {
+                                                        accent: { primary: '#4F46E5', level: 2 },
+                                                    },
+                                                    radius: 'round',
+                                                    density: 'spacious',
+                                                },
+                                                startScreen: {
+                                                    greeting: '👋 Welcome to ConciergeOS! Discover how AI voice agents, chat assistants, and business automation can help your hospitality business increase bookings, improve guest experiences, and streamline operations.',
+                                                    prompts: [
+                                                        {
+                                                            label: 'Book a Reservation',
+                                                            prompt: 'I would like to make a reservation.',
+                                                            icon: 'calendar'
+                                                        },
+                                                        {
+                                                            label: 'Ask a Question',
+                                                            prompt: 'I have a question about your services.',
+                                                            icon: 'message'
+                                                        },
+                                                        {
+                                                            label: 'Business Automation',
+                                                            prompt: 'Tell me how ConciergeOS can automate my business.',
+                                                            icon: 'sparkles'
+                                                        }
+                                                    ]
+                                                },
+                                                composer: {
+                                                    placeholder: 'Ask about reservations, AI automation, or customer support...'
+                                                }
+                                            });
                                         } else {
-                                        setTimeout(initChatKit, 50);
+                                            setTimeout(initChatKit, 50);
                                         }
                                     }
-
                                     initChatKit();
+
                                 </script>
 
 
