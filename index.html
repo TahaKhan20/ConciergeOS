@@ -2316,6 +2316,11 @@ color:#CBD5E1;
 
                                     function initChatKit() {
                                         const kit = document.querySelector('openai-chatkit');
+
+                                        console.log(kit);
+                                        console.log(typeof kit.setOptions);
+                                        console.log(customElements.get("openai-chatkit"));
+                                        
                                         if (kit && kit.setOptions) {
                                         kit.setOptions({
                                             api: {
