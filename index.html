@@ -2300,6 +2300,56 @@ color:#CBD5E1;
 
                                 <openai-chatkit style="width: 100%; height: 600px; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.1);">
                                 </openai-chatkit>
+                                <script>
+                                    const DOMAIN_KEY = 'domain_pk_6a548ff4ce248197a246458c6713e8c70dadf08d8f890c9d'; // Replace with your actual domain key
+                                    const API_URL = 'https://openai.secondbrainos.com/chatkit';
+
+                                    const customFetch = (url, options = {}) => {
+                                        return fetch(url, {
+                                        ...options,
+                                        headers: {
+                                            ...options.headers,
+                                            'X-Domain-Key': DOMAIN_KEY,
+                                        },
+                                        });
+                                    };
+
+                                    function initChatKit() {
+                                        const kit = document.querySelector('openai-chatkit');
+                                        if (kit && kit.setOptions) {
+                                        kit.setOptions({
+                                            api: {
+                                            url: API_URL,
+                                            domainKey: DOMAIN_KEY,
+                                            fetch: customFetch,
+                                            },
+                                            theme: {
+                                            colorScheme: 'light',
+                                            color: {
+                                                accent: { primary: '#4F46E5', level: 2 },
+                                            },
+                                            radius: 'round',
+                                            density: 'spacious',
+                                            },
+                                            startScreen: {
+                                            greeting: 'Hi! I can help you book, reschedule, or cancel appointments. What would you like to do?',
+                                            prompts: [
+                                                { label: 'Book an appointment', prompt: 'I want to book an appointment', icon: 'calendar' },
+                                                { label: 'Check availability', prompt: 'What times are available?', icon: 'clock' },
+                                                { label: 'Reschedule', prompt: 'I need to reschedule my appointment', icon: 'reload' }
+                                            ]
+                                            },
+                                            composer: {
+                                            placeholder: 'Ask me about scheduling...'
+                                            }
+                                        });
+                                        } else {
+                                        setTimeout(initChatKit, 50);
+                                        }
+                                    }
+
+                                    initChatKit();
+                                </script>
 
                             </div>
 
@@ -2360,56 +2410,6 @@ color:#CBD5E1;
 
 </section>
 <!--Chatkit-->
-<script>
-    const DOMAIN_KEY = 'domain_pk_6a548ff4ce248197a246458c6713e8c70dadf08d8f890c9d'; // Replace with your actual domain key
-    const API_URL = 'https://openai.secondbrainos.com/chatkit';
-
-    const customFetch = (url, options = {}) => {
-        return fetch(url, {
-        ...options,
-        headers: {
-            ...options.headers,
-            'X-Domain-Key': DOMAIN_KEY,
-        },
-        });
-    };
-
-    function initChatKit() {
-        const kit = document.querySelector('openai-chatkit');
-        if (kit && kit.setOptions) {
-        kit.setOptions({
-            api: {
-            url: API_URL,
-            domainKey: DOMAIN_KEY,
-            fetch: customFetch,
-            },
-            theme: {
-            colorScheme: 'light',
-            color: {
-                accent: { primary: '#4F46E5', level: 2 },
-            },
-            radius: 'round',
-            density: 'spacious',
-            },
-            startScreen: {
-            greeting: 'Hi! I can help you book, reschedule, or cancel appointments. What would you like to do?',
-            prompts: [
-                { label: 'Book an appointment', prompt: 'I want to book an appointment', icon: 'calendar' },
-                { label: 'Check availability', prompt: 'What times are available?', icon: 'clock' },
-                { label: 'Reschedule', prompt: 'I need to reschedule my appointment', icon: 'reload' }
-            ]
-            },
-            composer: {
-            placeholder: 'Ask me about scheduling...'
-            }
-        });
-        } else {
-        setTimeout(initChatKit, 50);
-        }
-    }
-
-    initChatKit();
-</script>
 
 <!-- Calendly -->
 
