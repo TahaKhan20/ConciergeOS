@@ -30,7 +30,7 @@ function getChatKitOptions(colorScheme) {
     theme: {
       colorScheme: colorScheme,
       color: {
-        accent: { primary: '#4F46E5', level: 2 },
+        accent: { primary: '#051333', level: 2 },
       },
       radius:  'round',
       density: 'spacious',
@@ -56,27 +56,70 @@ function getChatKitOptions(colorScheme) {
 function initChatKit() {
   const kit = document.querySelector('openai-chatkit');
   if (kit && typeof kit.setOptions === 'function') {
-    const colorScheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-    kit.setOptions(getChatKitOptions(colorScheme));
-    customizeChatKit();
+    const theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    kit.setOptions(getChatKitOptions(theme));
+    customizeChatKit(theme);
   } else {
     setTimeout(initChatKit, 50);
   }
 }
 
-function customizeChatKit() {
+/**
+ * Injects theme-aware overrides into the ChatKit shadow DOM.
+ * Called on init and every time the theme changes.
+ * No guard — always removes the previous injection and re-injects so
+ * theme toggles are reflected correctly.
+ */
+function customizeChatKit(theme) {
   const chat = document.querySelector('openai-chatkit');
   if (!chat || !chat.shadowRoot) {
-    return setTimeout(customizeChatKit, 100);
+    return setTimeout(() => customizeChatKit(theme), 100);
   }
-  // Guard: only inject styles once
-  if (chat.shadowRoot.querySelector('[data-cOS-styles]')) return;
+
+  // Remove any previous injection so the new theme takes effect
+  const existing = chat.shadowRoot.querySelector('[data-cOS-styles]');
+  if (existing) existing.remove();
+
+  // In light mode let ChatKit use its own native styles
+  if (theme !== 'dark') return;
+
   const style = document.createElement('style');
   style.setAttribute('data-cOS-styles', '');
   style.textContent = `
+    /* Force dark backgrounds — covers bg-white AND all bg-slate-* variants */
+    .bg-white,
+    .bg-slate-50,
+    .bg-slate-100,
+    .bg-slate-800,
+    .bg-slate-900,
     .bg-slate-950,
-    .bg-slate-900 { background: #03081b !important; }
-    [class*="bg-slate"] { background: #03081b !important; }
+    [class*="bg-slate"],
+    [class*="bg-gray"],
+    [class*="bg-zinc"] {
+      background: #0f172a !important;
+    }
+
+    /* Ensure text is readable on dark backgrounds */
+    .text-slate-900,
+    .text-gray-900,
+    .text-black {
+      color: #f8fafc !important;
+    }
+
+    .text-slate-500,
+    .text-gray-500,
+    .text-slate-600,
+    .text-gray-600 {
+      color: #94a3b8 !important;
+    }
+
+    /* Soften borders */
+    .border-slate-200,
+    .border-gray-200,
+    .border-slate-100,
+    .border-gray-100 {
+      border-color: #334155 !important;
+    }
   `;
   chat.shadowRoot.appendChild(style);
 }
@@ -129,10 +172,11 @@ function applyTheme(theme) {
     if (mobileTheme) { mobileTheme.innerHTML = '&#127769;'; mobileTheme.setAttribute('aria-label', 'Switch to dark mode'); }
   }
 
-  // Re-apply chatkit theme so the widget matches
+  // Re-apply ChatKit theme (colorScheme + shadow DOM overrides)
   const chat = document.getElementById('chat');
   if (chat && typeof chat.setOptions === 'function') {
     chat.setOptions(getChatKitOptions(theme));
+    customizeChatKit(theme);
   }
 
   // Re-apply Calendly theme
