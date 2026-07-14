@@ -30,7 +30,7 @@ function getChatKitOptions(colorScheme) {
     theme: {
       colorScheme: colorScheme,
       color: {
-        accent: { primary: '#051333', level: 2 },
+        accent: { primary: '#ffffff', level: 2 },
       },
       radius:  'round',
       density: 'spacious',
@@ -119,6 +119,45 @@ function customizeChatKit(theme) {
     .border-slate-100,
     .border-gray-100 {
       border-color: #334155 !important;
+    }
+
+    /* ---- Send button: white background + dark arrow in dark mode ---- */
+    form button[type="submit"],
+    button[aria-label*="Send" i],
+    button[class*="send"],
+    button[class*="Send"],
+    [class*="send-button"],
+    [class*="sendButton"],
+    [class*="send-btn"],
+    [class*="sendBtn"] {
+      background:       #ffffff !important;
+      background-color: #ffffff !important;
+      color:            #051333 !important;
+    }
+
+    form button[type="submit"] svg,
+    button[aria-label*="Send" i] svg,
+    button[class*="send"] svg,
+    button[class*="Send"] svg,
+    [class*="send-button"] svg,
+    [class*="sendButton"] svg,
+    [class*="send-btn"] svg,
+    [class*="sendBtn"] svg {
+      color:  #051333 !important;
+      fill:   #051333 !important;
+      stroke: #051333 !important;
+    }
+
+    form button[type="submit"] svg path,
+    button[aria-label*="Send" i] svg path,
+    button[class*="send"] svg path,
+    button[class*="Send"] svg path,
+    [class*="send-button"] svg path,
+    [class*="sendButton"] svg path,
+    [class*="send-btn"] svg path,
+    [class*="sendBtn"] svg path {
+      fill:   #051333 !important;
+      stroke: #051333 !important;
     }
   `;
   chat.shadowRoot.appendChild(style);
