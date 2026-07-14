@@ -610,8 +610,8 @@ input[type=range] { accent-color: #2563EB; }
 }
 
 .demo-desc {
-  padding: 2px 28px;
-  font-size: 1.125rem;
+  padding: 5px 28px;
+  font-size: 0.9rem;
   line-height: 1.8rem;
   color: #64748B;
 }
@@ -638,7 +638,7 @@ input[type=range] { accent-color: #2563EB; }
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px 28px;
+  padding: 20px 28px;
   border-bottom: 1px solid #E2E8F0;
 }
 
