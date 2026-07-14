@@ -819,3 +819,39 @@ input[type=range] { accent-color: #2563EB; }
 }
 
 .dark .faq-item p { color: #CBD5E1; }
+
+/* ============================================================
+   FOCUS VISIBLE
+============================================================ */
+
+:focus-visible {
+  outline: 2px solid #2563EB;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ============================================================
+   REDUCED MOTION
+============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .float,
+  .float2,
+  .video-floating,
+  .workflow-arrow {
+    animation: none;
+  }
+
+  .logo-track,
+  .integration-track {
+    animation: none;
+    overflow-x: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}

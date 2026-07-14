@@ -41,6 +41,26 @@ tailwind.config = {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
+<!-- Canonical & favicon -->
+<link rel="canonical" href="https://conciergeos.ai/">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+<!-- Open Graph -->
+<meta property="og:type"        content="website">
+<meta property="og:url"         content="https://conciergeos.ai/">
+<meta property="og:title"       content="ConciergeOS | AI Business Automation">
+<meta property="og:description" content="AI Voice & Chat Receptionists that answer every call, qualify leads, and book appointments 24/7.">
+<meta property="og:image"       content="https://conciergeos.ai/og-image.png">
+
+<!-- Twitter Card -->
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:title"       content="ConciergeOS | AI Business Automation">
+<meta name="twitter:description" content="AI Voice & Chat Receptionists that answer every call, qualify leads, and book appointments 24/7.">
+<meta name="twitter:image"       content="https://conciergeos.ai/og-image.png">
+
+<!-- Dark mode: apply synchronously before render to prevent flash -->
+<script>(function(){var t=localStorage.getItem('theme')||'light';if(t==='dark')document.documentElement.classList.add('dark');}());</script>
+
 <!-- Site styles -->
 <link rel="stylesheet" href="styles.css">
 
@@ -61,7 +81,7 @@ tailwind.config = {
         <a href="#" class="flex items-center gap-4">
           <div class="logo gradient">R</div>
           <div>
-            <h1 class="font-bold text-xl">ConciergeOS</h1>
+            <span class="font-bold text-xl block">ConciergeOS</span>
             <p class="text-xs text-slate-500 dark:text-slate-400">AI Receptionists</p>
           </div>
         </a>
@@ -75,11 +95,11 @@ tailwind.config = {
         </div>
 
         <div class="hidden lg:flex items-center gap-4">
-          <button id="themeToggle" class="w-11 h-11 rounded-xl border border-slate-300 dark:border-slate-600">🌙</button>
+          <button id="themeToggle" aria-label="Switch to dark mode" class="w-11 h-11 rounded-xl border border-slate-300 dark:border-slate-600">🌙</button>
           <a href="#demo" class="gradient text-white px-6 py-3 rounded-xl font-semibold hover:scale-105 transition">Book Demo</a>
         </div>
 
-        <button id="menuButton" class="lg:hidden text-3xl">☰</button>
+        <button id="menuButton" aria-label="Open navigation menu" class="lg:hidden text-3xl">☰</button>
 
       </div>
 
@@ -94,7 +114,7 @@ tailwind.config = {
       <a href="#trust">Trust</a>
       <a href="#integrations">Integrations</a>
       <a href="#demo">Book Demo</a>
-      <button id="mobileTheme" class="self-start w-11 h-11 rounded-xl border border-slate-300 dark:border-slate-600">🌙</button>
+      <button id="mobileTheme" aria-label="Switch to dark mode" class="self-start w-11 h-11 rounded-xl border border-slate-300 dark:border-slate-600">🌙</button>
     </div>
   </div>
 
@@ -109,7 +129,7 @@ tailwind.config = {
   <div class="absolute -left-40 -top-40 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl"></div>
   <div class="absolute right-0 top-32 w-[500px] h-[500px] bg-cyan-300/20 rounded-full blur-3xl"></div>
 
-  <div class="max-w-7xl mx-auto px-6 py-15 lg:py-20">
+  <div class="max-w-7xl mx-auto px-6 py-14 lg:py-20">
 
     <div class="grid lg:grid-cols-2 gap-20 items-center">
 
@@ -124,7 +144,7 @@ tailwind.config = {
         <h1 class="mt-8 text-6xl lg:text-6xl font-extrabold leading-tight">
           AI Receptionists
           <span class="gradient bg-clip-text text-transparent">That Never Miss</span>
-          <p>A Customer</p>
+          <span class="block">A Customer</span>
         </h1>
 
         <p class="mt-8 text-xl leading-9 text-slate-600 dark:text-slate-300">
@@ -458,24 +478,24 @@ tailwind.config = {
     <div class="logo-marquee">
       <div class="integration-track">
 
-        <div class="integration-pill"><img src="https://cdn.simpleicons.org/openai" alt="OpenAI"><span>OpenAI</span></div>
-        <div class="integration-pill"><img src="https://cdn.simpleicons.org/n8n" alt="n8n"><span>n8n</span></div>
-        <div class="integration-pill"><img src="https://cdn.simpleicons.org/elevenlabs" alt="ElevenLabs"><span>ElevenLabs</span></div>
-        <div class="integration-pill"><img src="https://cdn.simpleicons.org/calendly" alt="Calendly"><span>Calendly</span></div>
-        <div class="integration-pill"><img src="https://cdn.simpleicons.org/googlecalendar" alt="Google Calendar"><span>Google Calendar</span></div>
-        <div class="integration-pill"><img src="https://cdn.simpleicons.org/gmail" alt="Gmail"><span>Gmail</span></div>
-        <div class="integration-pill"><img src="https://cdn.simpleicons.org/microsoftoutlook" alt="Outlook"><span>Outlook</span></div>
-        <div class="integration-pill"><img src="https://cdn.simpleicons.org/whatsapp" alt="WhatsApp"><span>WhatsApp</span></div>
+        <div class="integration-pill"><img loading="lazy" src="https://cdn.simpleicons.org/openai" alt="OpenAI"><span>OpenAI</span></div>
+        <div class="integration-pill"><img loading="lazy" src="https://cdn.simpleicons.org/n8n" alt="n8n"><span>n8n</span></div>
+        <div class="integration-pill"><img loading="lazy" src="https://cdn.simpleicons.org/elevenlabs" alt="ElevenLabs"><span>ElevenLabs</span></div>
+        <div class="integration-pill"><img loading="lazy" src="https://cdn.simpleicons.org/calendly" alt="Calendly"><span>Calendly</span></div>
+        <div class="integration-pill"><img loading="lazy" src="https://cdn.simpleicons.org/googlecalendar" alt="Google Calendar"><span>Google Calendar</span></div>
+        <div class="integration-pill"><img loading="lazy" src="https://cdn.simpleicons.org/gmail" alt="Gmail"><span>Gmail</span></div>
+        <div class="integration-pill"><img loading="lazy" src="https://cdn.simpleicons.org/microsoftoutlook" alt="Outlook"><span>Outlook</span></div>
+        <div class="integration-pill"><img loading="lazy" src="https://cdn.simpleicons.org/whatsapp" alt="WhatsApp"><span>WhatsApp</span></div>
 
         <!-- Duplicated for seamless infinite loop -->
-        <div class="integration-pill"><img src="https://cdn.simpleicons.org/openai" alt="OpenAI"><span>OpenAI</span></div>
-        <div class="integration-pill"><img src="https://cdn.simpleicons.org/n8n" alt="n8n"><span>n8n</span></div>
-        <div class="integration-pill"><img src="https://cdn.simpleicons.org/elevenlabs" alt="ElevenLabs"><span>ElevenLabs</span></div>
-        <div class="integration-pill"><img src="https://cdn.simpleicons.org/calendly" alt="Calendly"><span>Calendly</span></div>
-        <div class="integration-pill"><img src="https://cdn.simpleicons.org/googlecalendar" alt="Google Calendar"><span>Google Calendar</span></div>
-        <div class="integration-pill"><img src="https://cdn.simpleicons.org/gmail" alt="Gmail"><span>Gmail</span></div>
-        <div class="integration-pill"><img src="https://cdn.simpleicons.org/microsoftoutlook" alt="Outlook"><span>Outlook</span></div>
-        <div class="integration-pill"><img src="https://cdn.simpleicons.org/whatsapp" alt="WhatsApp"><span>WhatsApp</span></div>
+        <div class="integration-pill"><img loading="lazy" src="https://cdn.simpleicons.org/openai" alt="OpenAI"><span>OpenAI</span></div>
+        <div class="integration-pill"><img loading="lazy" src="https://cdn.simpleicons.org/n8n" alt="n8n"><span>n8n</span></div>
+        <div class="integration-pill"><img loading="lazy" src="https://cdn.simpleicons.org/elevenlabs" alt="ElevenLabs"><span>ElevenLabs</span></div>
+        <div class="integration-pill"><img loading="lazy" src="https://cdn.simpleicons.org/calendly" alt="Calendly"><span>Calendly</span></div>
+        <div class="integration-pill"><img loading="lazy" src="https://cdn.simpleicons.org/googlecalendar" alt="Google Calendar"><span>Google Calendar</span></div>
+        <div class="integration-pill"><img loading="lazy" src="https://cdn.simpleicons.org/gmail" alt="Gmail"><span>Gmail</span></div>
+        <div class="integration-pill"><img loading="lazy" src="https://cdn.simpleicons.org/microsoftoutlook" alt="Outlook"><span>Outlook</span></div>
+        <div class="integration-pill"><img loading="lazy" src="https://cdn.simpleicons.org/whatsapp" alt="WhatsApp"><span>WhatsApp</span></div>
 
       </div>
     </div>

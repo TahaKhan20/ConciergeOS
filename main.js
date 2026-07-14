@@ -2,8 +2,9 @@
    CONFIGURATION
 ============================================================ */
 
-const DOMAIN_KEY = 'domain_pk_6a548ff4ce248197a246458c6713e8c70dadf08d8f890c9d';
-const API_URL    = 'https://openai.secondbrainos.com/chatkit';
+const DOMAIN_KEY        = 'domain_pk_6a548ff4ce248197a246458c6713e8c70dadf08d8f890c9d';
+const API_URL           = 'https://openai.secondbrainos.com/chatkit';
+const CALENDLY_BASE_URL = 'https://calendly.com/mohammadtahakhan20/30min';
 
 const customFetch = (url, options = {}) => {
   return fetch(url, {
@@ -68,13 +69,46 @@ function customizeChatKit() {
   if (!chat || !chat.shadowRoot) {
     return setTimeout(customizeChatKit, 100);
   }
+  // Guard: only inject styles once
+  if (chat.shadowRoot.querySelector('[data-cOS-styles]')) return;
   const style = document.createElement('style');
+  style.setAttribute('data-cOS-styles', '');
   style.textContent = `
     .bg-slate-950,
     .bg-slate-900 { background: #03081b !important; }
     [class*="bg-slate"] { background: #03081b !important; }
   `;
   chat.shadowRoot.appendChild(style);
+}
+
+/* ============================================================
+   CALENDLY THEME
+============================================================ */
+
+function getCalendlyUrl(theme) {
+  const params = theme === 'dark'
+    ? '?background_color=0f172a&text_color=f8fafc&primary_color=2563eb'
+    : '?primary_color=2563eb';
+  return CALENDLY_BASE_URL + params;
+}
+
+function updateCalendlyTheme(theme) {
+  const container = document.querySelector('.calendly-inline-widget');
+  if (!container) return;
+
+  const url = getCalendlyUrl(theme);
+
+  // Always update the data-url so Calendly reads the right URL on first load
+  container.setAttribute('data-url', url);
+
+  // If the Calendly SDK is already loaded, destroy and re-init the widget
+  if (window.Calendly && typeof window.Calendly.initInlineWidget === 'function') {
+    container.innerHTML = '';
+    window.Calendly.initInlineWidget({
+      url:           url,
+      parentElement: container,
+    });
+  }
 }
 
 /* ============================================================
@@ -87,12 +121,12 @@ function applyTheme(theme) {
 
   if (theme === 'dark') {
     document.documentElement.classList.add('dark');
-    if (themeToggle) themeToggle.innerHTML = '&#9728;&#65039;';
-    if (mobileTheme) mobileTheme.innerHTML = '&#9728;&#65039;';
+    if (themeToggle) { themeToggle.innerHTML = '&#9728;&#65039;'; themeToggle.setAttribute('aria-label', 'Switch to light mode'); }
+    if (mobileTheme) { mobileTheme.innerHTML = '&#9728;&#65039;'; mobileTheme.setAttribute('aria-label', 'Switch to light mode'); }
   } else {
     document.documentElement.classList.remove('dark');
-    if (themeToggle) themeToggle.innerHTML = '&#127769;';
-    if (mobileTheme) mobileTheme.innerHTML = '&#127769;';
+    if (themeToggle) { themeToggle.innerHTML = '&#127769;'; themeToggle.setAttribute('aria-label', 'Switch to dark mode'); }
+    if (mobileTheme) { mobileTheme.innerHTML = '&#127769;'; mobileTheme.setAttribute('aria-label', 'Switch to dark mode'); }
   }
 
   // Re-apply chatkit theme so the widget matches
@@ -101,7 +135,48 @@ function applyTheme(theme) {
     chat.setOptions(getChatKitOptions(theme));
   }
 
+  // Re-apply Calendly theme
+  updateCalendlyTheme(theme);
+
   localStorage.setItem('theme', theme);
+}
+
+/* ============================================================
+   COUNTER ANIMATION
+============================================================ */
+
+function animateCounter(el) {
+  const target = parseFloat(el.getAttribute('data-target'));
+  const isDecimal = target % 1 !== 0;
+  const duration = 1800;
+  const start = performance.now();
+
+  function step(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+    const value = target * eased;
+    el.textContent = isDecimal ? value.toFixed(1) : Math.floor(value);
+    if (progress < 1) requestAnimationFrame(step);
+  }
+
+  requestAnimationFrame(step);
+}
+
+function initCounters() {
+  const counters = document.querySelectorAll('.counter');
+  if (!counters.length) return;
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(el => observer.observe(el));
 }
 
 /* ============================================================
@@ -135,7 +210,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (menuButton && mobileMenu) {
     menuButton.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
+      const isHidden = mobileMenu.classList.toggle('hidden');
+      menuButton.setAttribute('aria-label', isHidden ? 'Open navigation menu' : 'Close navigation menu');
     });
 
     // Close when a link is tapped
@@ -146,4 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---- ChatKit ---- */
   initChatKit();
+
+  /* ---- Counters ---- */
+  initCounters();
 });
