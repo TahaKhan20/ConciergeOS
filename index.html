@@ -61,12 +61,24 @@ tailwind.config = {
 <!-- Dark mode: apply synchronously before render to prevent flash -->
 <script>(function(){var t=localStorage.getItem('theme')||'light';if(t==='dark')document.documentElement.classList.add('dark');}());</script>
 
+<!-- Mobile menu open animation -->
+<style>
+  #mobileMenu:not(.hidden) {
+    animation: mobileMenuIn 0.2s ease-out;
+  }
+  @keyframes mobileMenuIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
 <!-- Site styles -->
 <link rel="stylesheet" href="styles.css">
 
 </head>
 
-<body class="text-slate-800 dark:text-white">
+<!-- overflow-x-hidden prevents horizontal bleed from hero blobs -->
+<body class="text-slate-800 dark:text-white overflow-x-hidden">
 
 <!-- ================= NAVBAR ================= -->
 
@@ -79,7 +91,6 @@ tailwind.config = {
       <div class="h-20 flex items-center justify-between">
 
         <a href="#" class="flex items-center gap-4">
-
             <img src="ConciergeOS Logo.png" alt="ConciergeOS Logo" width="36" height="36" style="border-radius:16px;object-fit:contain;">
           <div>
             <span class="font-bold text-xl block">ConciergeOS</span>
@@ -87,12 +98,14 @@ tailwind.config = {
           </div>
         </a>
 
-        <div class="hidden lg:flex items-center gap-10 font-medium">
-          <a href="#demo"         class="hover:text-primary transition">Live Demo</a>
-          <a href="#solution"     class="hover:text-primary transition">How it works</a>
-          <a href="#trust"        class="hover:text-primary transition">Trust</a>
-          <a href="#integrations" class="hover:text-primary transition">Services</a>
-          <a href="#demo"         class="hover:text-primary transition">Book Demo</a>
+        <div class="hidden lg:flex items-center gap-6 font-medium">
+          <a href="#problem"  class="hover:text-primary transition">The Problem</a>
+          <a href="#solution" class="hover:text-primary transition">How It Works</a>
+          <a href="#trust"    class="hover:text-primary transition">Trust</a>
+          <a href="#services" class="hover:text-primary transition">Services</a>
+          <a href="#video"    class="hover:text-primary transition">Voice Demo</a>
+          <a href="#faq"      class="hover:text-primary transition">FAQ</a>
+          <a href="#demo"     class="hover:text-primary transition">Book Demo</a>
         </div>
 
         <div class="hidden lg:flex items-center gap-4">
@@ -100,7 +113,11 @@ tailwind.config = {
           <a href="#demo" class="gradient text-white px-6 py-3 rounded-xl font-semibold hover:scale-105 transition">Book Demo</a>
         </div>
 
-        <button id="menuButton" aria-label="Open navigation menu" class="lg:hidden text-3xl">☰</button>
+        <!-- Hamburger: explicit 44×44 touch target -->
+        <button id="menuButton" aria-label="Open navigation menu"
+                class="lg:hidden w-11 h-11 flex items-center justify-center rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition text-2xl">
+          ☰
+        </button>
 
       </div>
 
@@ -108,14 +125,19 @@ tailwind.config = {
 
   </nav>
 
+  <!-- Mobile menu: each link is a full-width tap target with py-3 -->
   <div id="mobileMenu" class="hidden glass border-b border-slate-200 dark:border-slate-700">
-    <div class="px-6 py-6 flex flex-col gap-5">
-      <a href="#problem">Problem</a>
-      <a href="#solution">Solution</a>
-      <a href="#trust">Trust</a>
-      <a href="#integrations">Integrations</a>
-      <a href="#demo">Book Demo</a>
-      <button id="mobileTheme" aria-label="Switch to dark mode" class="self-start w-11 h-11 rounded-xl border border-slate-300 dark:border-slate-600">🌙</button>
+    <div class="px-6 py-2 flex flex-col">
+      <a href="#problem"  class="py-3 font-medium border-b border-slate-100 dark:border-slate-800 hover:text-primary transition">The Problem</a>
+      <a href="#solution" class="py-3 font-medium border-b border-slate-100 dark:border-slate-800 hover:text-primary transition">How It Works</a>
+      <a href="#trust"    class="py-3 font-medium border-b border-slate-100 dark:border-slate-800 hover:text-primary transition">Trust</a>
+      <a href="#services" class="py-3 font-medium border-b border-slate-100 dark:border-slate-800 hover:text-primary transition">Services</a>
+      <a href="#video"    class="py-3 font-medium border-b border-slate-100 dark:border-slate-800 hover:text-primary transition">Voice Demo</a>
+      <a href="#faq"      class="py-3 font-medium border-b border-slate-100 dark:border-slate-800 hover:text-primary transition">FAQ</a>
+      <a href="#demo"     class="py-3 font-medium hover:text-primary transition">Book Demo</a>
+      <div class="py-4">
+        <button id="mobileTheme" aria-label="Switch to dark mode" class="w-11 h-11 rounded-xl border border-slate-300 dark:border-slate-600">🌙</button>
+      </div>
     </div>
   </div>
 
@@ -132,7 +154,7 @@ tailwind.config = {
 
   <div class="max-w-7xl mx-auto px-6 py-14 lg:py-20">
 
-    <div class="grid lg:grid-cols-2 gap-20 items-center">
+    <div class="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
 
       <!-- LEFT -->
       <div>
@@ -142,7 +164,7 @@ tailwind.config = {
           Trusted by Businesses Worldwide
         </div>
 
-        <h1 class="mt-8 text-6xl lg:text-6xl font-extrabold leading-tight">
+        <h1 class="mt-8 text-4xl lg:text-6xl font-extrabold leading-tight">
           AI Receptionists
           <span class="gradient bg-clip-text text-transparent">for Hospitality</span>
           <span class="block">Available 24/7</span>
@@ -174,8 +196,8 @@ tailwind.config = {
 
       </div>
 
-      <!-- RIGHT -->
-      <div class="relative">
+      <!-- RIGHT: hidden on mobile to keep hero focused and compact -->
+      <div class="hidden lg:block relative">
 
         <div class="hero-image">
 
@@ -237,7 +259,7 @@ tailwind.config = {
 
     <div class="max-w-3xl mx-auto text-center">
       <span class="inline-flex px-5 py-2 rounded-full bg-blue-100 dark:bg-slate-800 text-primary font-semibold">The Problem</span>
-      <h2 class="mt-6 text-4xl lg:text-6xl font-extrabold">
+      <h2 class="mt-6 text-3xl lg:text-6xl font-extrabold">
         Every Missed Call
         <span class="text-primary">Costs You Money</span>
       </h2>
@@ -271,7 +293,7 @@ tailwind.config = {
     <div class="mt-20">
       <div class="rounded-3xl gradient p-12 text-center text-white shadow-card">
         <p class="uppercase tracking-[0.3em] text-white/70 text-sm">Reality</p>
-        <h2 class="mt-6 text-4xl lg:text-6xl font-extrabold">Customers Won't Wait.</h2>
+        <h2 class="mt-6 text-3xl lg:text-6xl font-extrabold">Customers Won't Wait.</h2>
         <p class="mt-6 text-xl max-w-3xl mx-auto text-white/90 leading-9">
           The first business to answer usually wins the customer.<br>
           Your AI Receptionist responds instantly—day or night.
@@ -291,7 +313,7 @@ tailwind.config = {
 
     <div class="max-w-3xl mx-auto text-center">
       <span class="inline-flex px-5 py-2 rounded-full bg-blue-100 dark:bg-slate-800 text-primary font-semibold">Our Solution</span>
-      <h2 class="mt-6 text-4xl lg:text-6xl font-extrabold">
+      <h2 class="mt-6 text-3xl lg:text-6xl font-extrabold">
         Your AI Receptionist<br>Works While You Sleep
       </h2>
       <p class="mt-8 text-lg text-slate-600 dark:text-slate-400 leading-8">
@@ -299,9 +321,9 @@ tailwind.config = {
       </p>
     </div>
 
-    <!-- Workflow -->
-    <div class="mt-20 overflow-x-auto">
-      <div class="flex items-center justify-center gap-3 min-w-[1000px]">
+    <!-- Workflow: CSS handles rotation and animation per breakpoint -->
+    <div class="mt-20">
+      <div class="flex flex-col lg:flex-row items-center justify-center gap-3">
 
         <div class="workflow-card">
           <div class="workflow-circle">📞</div>
@@ -414,7 +436,8 @@ tailwind.config = {
       <div class="rounded-2xl border border-slate-200 dark:border-slate-700 p-4 text-center hover:shadow-xl transition"><p class="text-3xl">🍽️</p><p class="mt-2 font-semibold">Restaurant</p></div>
     </div>
 
-    <div class="grid md:grid-cols-4 gap-8 mt-12">
+    <!-- grid-cols-2 on mobile, 4 on md+ -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-12">
       <div class="stat-card"><h3 class="counter" data-target="98">98</h3><p>% Calls Answered</p></div>
       <div class="stat-card"><h3 class="counter" data-target="24">24</h3><p>Hours Availability</p></div>
       <div class="stat-card"><h3 class="counter" data-target="45">45</h3><p>% More Bookings</p></div>
@@ -425,13 +448,14 @@ tailwind.config = {
 
 </section>
 
-<!-- ================= INTEGRATIONS ================= -->
+<!-- ================= SERVICES ================= -->
 
-<section id="integrations" class="py-12 bg-white dark:bg-slate-950">
+<section id="services" class="py-12 bg-white dark:bg-slate-950">
 
   <div class="max-w-7xl mx-auto px-6">
 
-    <div class="gradient rounded-xl px-[24px] py-[10px] lg:px-24 lg:py-10 mb-12 text-center">
+    <!-- Fixed mobile padding: py-8 on mobile, py-10 on desktop -->
+    <div class="gradient rounded-xl px-6 py-8 lg:px-24 lg:py-10 mb-12 text-center">
       <p class="uppercase tracking-[0.3em] text-white/70 text-sm">Works With Your Business</p>
       <h2 class="mt-6 text-3xl lg:text-4xl text-white font-extrabold">
         More Than an AI Receptionist.<br>
@@ -513,7 +537,7 @@ tailwind.config = {
 
     <div class="text-center max-w-3xl mx-auto">
       <span class="inline-flex px-5 py-2 rounded-full bg-blue-100 dark:bg-slate-800 text-primary font-semibold">Voice Assistant Demo</span>
-      <h2 class="mt-6 text-5xl lg:text-6xl font-extrabold">
+      <h2 class="mt-6 text-3xl lg:text-6xl font-extrabold">
         Watch Your
         <span class="text-primary">AI Receptionist</span>
         In Action
@@ -545,7 +569,7 @@ tailwind.config = {
 
     <div class="max-w-4xl mx-auto text-center">
       <span class="inline-flex px-5 py-2 rounded-full bg-blue-100 dark:bg-slate-800 text-primary font-semibold">Live Interactive Demo</span>
-      <h2 class="mt-6 text-5xl lg:text-6xl font-extrabold">
+      <h2 class="mt-6 text-3xl lg:text-6xl font-extrabold">
         Experience ConciergeOS
         <span class="text-primary">Live</span>
       </h2>
@@ -573,7 +597,6 @@ tailwind.config = {
               Ask questions, explore capabilities and experience how your customers interact with AI.
             </p>
           </div>
-
 
           <div>
             <openai-chatkit class="chatkit" id="chat"></openai-chatkit>
@@ -618,7 +641,7 @@ tailwind.config = {
 
     <div class="text-center">
       <span class="inline-flex px-5 py-2 rounded-full bg-blue-100 dark:bg-slate-800 text-primary font-semibold">Frequently Asked Questions</span>
-      <h2 class="mt-6 text-5xl lg:text-6xl font-extrabold">
+      <h2 class="mt-6 text-3xl lg:text-6xl font-extrabold">
         Everything You Need
         <span class="text-primary">To Know</span>
       </h2>
@@ -671,9 +694,9 @@ tailwind.config = {
 
   <div class="max-w-7xl mx-auto px-6 py-20">
 
-    <div class="grid lg:grid-cols-4 gap-14">
+    <div class="grid lg:grid-cols-3 gap-14">
 
-      <!-- Company -->
+      <!-- Brand -->
       <div>
         <div class="flex items-center gap-4">
           <img src="ConciergeOS Logo.png" alt="ConciergeOS Logo" width="36" height="36" style="border-radius:10px;object-fit:contain;">
@@ -692,21 +715,11 @@ tailwind.config = {
       <div>
         <h3 class="font-bold text-lg mb-6">Product</h3>
         <ul class="space-y-4 text-slate-400">
-          <li><a href="#solution"     class="hover:text-white">Features</a></li>
-          <li><a href="#integrations" class="hover:text-white">Integrations</a></li>
-          <li><a href="#video"        class="hover:text-white">Demo Video</a></li>
-          <li><a href="#demo"         class="hover:text-white">Live AI</a></li>
-        </ul>
-      </div>
-
-      <!-- Company links -->
-      <div>
-        <h3 class="font-bold text-lg mb-6">Company</h3>
-        <ul class="space-y-4 text-slate-400">
-          <li><a href="#" class="hover:text-white">About</a></li>
-          <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
-          <li><a href="#" class="hover:text-white">Terms</a></li>
-          <li><a href="#" class="hover:text-white">Contact</a></li>
+          <li><a href="#solution" class="hover:text-white">Features</a></li>
+          <li><a href="#services"  class="hover:text-white">Services</a></li>
+          <li><a href="#video"     class="hover:text-white">Voice Demo</a></li>
+          <li><a href="#demo"      class="hover:text-white">Book Demo</a></li>
+          <li><a href="#faq"       class="hover:text-white">FAQ</a></li>
         </ul>
       </div>
 
@@ -726,14 +739,8 @@ tailwind.config = {
 
     <div class="border-t border-slate-800 my-12"></div>
 
-    <div class="flex flex-col lg:flex-row justify-between items-center gap-5">
+    <div class="text-center">
       <p class="text-slate-500">© 2026 ConciergeOS. All rights reserved.</p>
-      <div class="flex gap-8 text-slate-400">
-        <a href="#">LinkedIn</a>
-        <a href="#">Facebook</a>
-        <a href="#">X</a>
-        <a href="#">YouTube</a>
-      </div>
     </div>
 
   </div>

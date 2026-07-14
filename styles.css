@@ -172,17 +172,31 @@ body {
   font-size: 18px;
 }
 
+/* Desktop: animate horizontally */
 .workflow-arrow {
   font-size: 38px;
   font-weight: 700;
   color: #2563EB;
-  animation: arrowMove 1.8s infinite;
+  animation: arrowMoveH 1.8s infinite;
 }
 
-@keyframes arrowMove {
+@keyframes arrowMoveH {
   0%   { transform: translateX(0);    opacity: .4; }
   50%  { transform: translateX(10px); opacity: 1;  }
   100% { transform: translateX(0);    opacity: .4; }
+}
+
+/* Mobile: rotate arrow 90° and animate vertically */
+@media (max-width: 1023px) {
+  .workflow-card  { width: 220px; }
+  .workflow-arrow {
+    animation: arrowMoveV 1.8s infinite;
+  }
+  @keyframes arrowMoveV {
+    0%   { transform: rotate(90deg) translateX(0);    opacity: .4; }
+    50%  { transform: rotate(90deg) translateX(8px);  opacity: 1;  }
+    100% { transform: rotate(90deg) translateX(0);    opacity: .4; }
+  }
 }
 
 /* ============================================================
@@ -770,10 +784,17 @@ input[type=range] { accent-color: #2563EB; }
   .demo-body          { padding: 18px; }
   .placeholder h3     { font-size: 24px; }
   .placeholder p      { font-size: 15px; }
-  .booking-header     { padding: 24px; }
-  .booking-features   { padding: 0 24px 20px; }
+  .booking-header     { padding: 20px; }
+  .booking-header h3  { font-size: 22px; }
+  .booking-features   { padding: 0 20px 16px; }
   .calendly-container { padding: 0 12px 12px; }
   .bottom-card        { padding: 24px; }
+  /* Reduce chatkit height on small screens */
+  .chatkit            { height: 460px; }
+  /* Tighter padding for problem and stat cards */
+  .problem-card       { padding: 24px; }
+  .stat-card          { padding: 20px; }
+  .stat-card h3       { font-size: 2.2rem; }
 }
 
 /* ============================================================
@@ -826,6 +847,11 @@ input[type=range] { accent-color: #2563EB; }
 }
 
 .dark .faq-item p { color: #CBD5E1; }
+
+@media (max-width: 640px) {
+  .faq-item         { padding: 18px 20px; }
+  .faq-item summary { font-size: 16px; }
+}
 
 /* ============================================================
    FOCUS VISIBLE
