@@ -36,7 +36,7 @@ function getChatKitOptions(colorScheme) {
       density: 'spacious',
     },
     startScreen: {
-      greeting: "Welcome to ConciergeOS! I'm your AI Receptionist. I can answer questions about ConciergeOS, explain how our AI Voice & Chat solutions can help your business, discuss workflow automation and integrations, or help you schedule a personalized demo. How can I assist you today?",
+      greeting: "Welcome to ConciergeOS! I'm your AI Receptionist. Whether you have questions about our AI solutions or want to book a demo, I'm here to help. What can I do for you today?",
       prompts: [
         {
           label: "Learn About ConciergeOS",
