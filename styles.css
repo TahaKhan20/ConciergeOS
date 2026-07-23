@@ -826,7 +826,7 @@ input[type=range] { accent-color: #2563EB; }
   background: white;
   border: 1px solid #E2E8F0;
   border-radius: 20px;
-  padding: 24px 28px;
+  padding: 10px 18px;
   transition: .3s;
 }
 
@@ -843,7 +843,7 @@ input[type=range] { accent-color: #2563EB; }
 .faq-item summary {
   list-style: none;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   display: flex;
   justify-content: space-between;
@@ -854,7 +854,7 @@ input[type=range] { accent-color: #2563EB; }
 
 .faq-item summary::after {
   content: '+';
-  font-size: 28px;
+  font-size: 18px;
   color: #2563EB;
   transition: .3s;
 }
@@ -862,15 +862,15 @@ input[type=range] { accent-color: #2563EB; }
 .faq-item[open] summary::after { content: '\2212'; }
 
 .faq-item p {
-  margin-top: 20px;
+  margin-top: 4px;
   color: #64748B;
-  line-height: 1.9;
+  line-height: 1.6;
 }
 
 .dark .faq-item p { color: #CBD5E1; }
 
 @media (max-width: 640px) {
-  .faq-item         { padding: 18px 20px; }
+  .faq-item         { padding: 8px 16px; }
   .faq-item summary { font-size: 16px; }
 }
 
