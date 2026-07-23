@@ -61,17 +61,6 @@ tailwind.config = {
 <!-- Dark mode: apply synchronously before render to prevent flash -->
 <script>(function(){var t=localStorage.getItem('theme')||'light';if(t==='dark')document.documentElement.classList.add('dark');}());</script>
 
-<!-- Mobile menu open animation -->
-<style>
-  #mobileMenu:not(.hidden) {
-    animation: mobileMenuIn 0.2s ease-out;
-  }
-  @keyframes mobileMenuIn {
-    from { opacity: 0; transform: translateY(-6px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-</style>
-
 <!-- Site styles -->
 <link rel="stylesheet" href="styles.css">
 
@@ -152,7 +141,7 @@ tailwind.config = {
   <div class="absolute -left-40 -top-40 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl"></div>
   <div class="absolute right-0 top-32 w-[500px] h-[500px] bg-cyan-300/20 rounded-full blur-3xl"></div>
 
-  <div class="max-w-7xl mx-auto px-6 py-14 lg:py-20">
+  <div class="max-w-7xl mx-auto px-6 py-14 lg:py-16">
 
     <div class="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
 
@@ -277,83 +266,104 @@ tailwind.config = {
 
 </section>
 
-<!-- ================= LIVE VOICE DEMO ================= -->
+<!-- ================= LIVE AI DEMOS (VOICE + CHAT SIDE BY SIDE) ================= -->
 
-<section id="voice" class="py-12 hero-bg overflow-hidden">
-
-  <div class="max-w-7xl mx-auto px-6">
-
-    <div class="max-w-3xl mx-auto text-center">
-      <span class="inline-flex px-5 py-2 rounded-full bg-blue-100 dark:bg-slate-800 text-primary font-semibold">Live Voice Demo</span>
-      <h2 class="mt-6 text-3xl lg:text-6xl font-extrabold">Talk to Our AI Receptionist</h2>
-      <p class="mt-6 text-xl text-slate-600 dark:text-slate-400 leading-9">Experience a real AI phone conversation.</p>
-    </div>
-
-    <div class="mt-16 rounded-[32px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-card p-8 lg:p-12">
-      <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-        <div>
-          <div class="badge">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            Live Now — Try It Yourself
-          </div>
-          <h3 class="mt-8 text-3xl lg:text-5xl font-extrabold leading-tight">Hear Your AI Receptionist in Action</h3>
-          <p class="mt-6 text-lg leading-8 text-slate-600 dark:text-slate-300">
-            Call to have a real conversation with our AI receptionist. Ask about appointments, services, or business hours — it handles enquiries just like a trained team member.
-          </p>
-          <div class="mt-8 flex flex-wrap gap-4">
-            <span class="inline-flex items-center gap-2 px-5 py-3 rounded-2xl border border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/40 text-sm font-medium text-emerald-700 dark:text-emerald-300"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Voice AI is live — tap the widget to start</span>
-          </div>
-        </div>
-
-        <div class="rounded-[28px] border border-slate-200 dark:border-slate-700 bg-slate-50/80 dark:bg-slate-950/60 min-h-[320px] flex items-center justify-center p-8">
-          <elevenlabs-convai agent-id="agent_9901kxjk0352fnm8nkvk6zvzgdy2"></elevenlabs-convai>
-          <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-</section>
-
-<!-- ================= LIVE CHAT DEMO ================= -->
-
-<section id="chat" class="py-12 hero-bg">
+<section id="voice" class="py-16 hero-bg overflow-hidden">
 
   <div class="max-w-7xl mx-auto px-6">
 
     <div class="max-w-3xl mx-auto text-center">
-      <span class="inline-flex px-5 py-2 rounded-full bg-blue-100 dark:bg-slate-800 text-primary font-semibold">Live AI Chat Demo</span>
-      <h2 class="mt-6 text-3xl lg:text-6xl font-extrabold">Chat With Our AI Assistant</h2>
-      <p class="mt-6 text-xl text-slate-600 dark:text-slate-400 leading-9">
-        Try ConciergeOS instantly, ask questions, and explore how AI can support modern businesses around the clock.
+      <span class="inline-flex px-5 py-2 rounded-full bg-blue-100 dark:bg-slate-800 text-primary font-semibold">Experience ConciergeOS Live</span>
+      <h2 class="mt-6 text-3xl lg:text-5xl font-extrabold">Try Our AI Receptionist</h2>
+      <p class="mt-6 text-lg text-slate-600 dark:text-slate-400 leading-8">
+        Talk to or chat with our AI receptionist right now. No signup needed — experience how ConciergeOS handles calls, qualifies leads, and books appointments for real businesses.
       </p>
     </div>
 
-    <div class="max-w-5xl mx-auto mt-16">
-      <div class="demo-card dark:bg-slate-950">
+    <div id="chat" class="mt-12 grid lg:grid-cols-2 gap-6">
 
-        <div class="demo-header">
-          <div class="flex items-center gap-4">
-            <div class="demo-avatar">🤖</div>
-            <div>
-              <h3 class="font-bold text-xl">ConciergeOS AI</h3>
-              <p class="text-sm text-slate-500 dark:text-slate-400">Online • Ready to help</p>
-            </div>
-          </div>
-          <span class="online-indicator">● Live</span>
+      <!-- LEFT: Voice AI -->
+      <div class="rounded-[28px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-card p-6 lg:p-8 flex flex-col">
+
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-xl gradient flex items-center justify-center text-xl">
+          🎙️
         </div>
-        <div class="demo-desc dark:text-slate-200">
-          <p>
-            Ask about appointments, lead qualification, integrations, and customer support workflows.
+        <div>
+          <h3 class="font-bold text-lg">AI Voice Receptionist</h3>
+          <p class="text-xs text-emerald-600 dark:text-emerald-400 font-medium flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            Live Demo Available
           </p>
         </div>
+      </div>
 
-        <div>
-          <openai-chatkit class="chatkit" id="chatkit"></openai-chatkit>
+      <p class="text-sm leading-7 text-slate-600 dark:text-slate-300">
+        Experience a real conversation with our AI receptionist. It answers calls naturally, books appointments, answers questions, and handles customer enquiries just like a trained team member.
+      </p>
+
+      <p class="mt-4 text-sm font-medium text-slate-700 dark:text-slate-200">
+        Try asking things like:
+      </p>
+
+      <ul class="mt-3 space-y-2 text-sm text-slate-500 dark:text-slate-400">
+        <li class="flex items-start gap-2">
+          <span class="text-primary font-bold">→</span>
+          "I'd like to book a demo."
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-primary font-bold">→</span>
+          "How can ConciergeOS help my business?"
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-primary font-bold">→</span>
+          "What can your AI receptionist do?"
+        </li>
+        <li class="flex items-start gap-2">
+          <span class="text-primary font-bold">→</span>
+          "Can it integrate with my existing workflow?"
+        </li>
+      </ul>
+
+      <div class="mt-auto pt-6">
+        <div class="rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-slate-800 dark:to-slate-800 border border-blue-200 dark:border-slate-600 p-6 text-center">
+
+          <div class="text-4xl mb-3">📞</div>
+
+          <h4 class="font-bold text-slate-900 dark:text-white">
+            Start a Live Conversation
+          </h4>
+
+          <p class="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">
+            Click <strong>"Start a Call"</strong> in the bottom-right corner and speak naturally. Ask questions, request a demo, or see how our AI handles real customer conversations.
+          </p>
+
+          <div class="mt-5 inline-flex items-center gap-2 rounded-full bg-emerald-100 dark:bg-emerald-900/30 px-4 py-2 text-xs font-semibold text-emerald-700 dark:text-emerald-300">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            AI Receptionist Online • Ready to Answer Instantly
+          </div>
+
+        </div>
+      </div>
+
+      </div>
+
+      <!-- RIGHT: Chat AI -->
+      <div class="rounded-[28px] bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-card p-6 lg:p-8 flex flex-col">
+
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-xl gradient flex items-center justify-center text-xl">💬</div>
+          <div>
+            <h3 class="font-bold text-lg">Chat AI Assistant</h3>
+            <p class="text-xs text-emerald-600 dark:text-emerald-400 font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Online</p>
+          </div>
+        </div>
+        <div class="flex-1 min-h-0">
+          <openai-chatkit class="chatkit" id="chatkit" style="height:100%;min-height:420px;"></openai-chatkit>
         </div>
 
       </div>
+
     </div>
 
   </div>
@@ -362,7 +372,7 @@ tailwind.config = {
 
 <!-- ================= PROBLEM ================= -->
 
-<section id="problem" class="py-24 bg-white dark:bg-slate-950">
+<section id="problem" class="py-16 bg-white dark:bg-slate-950">
 
   <div class="max-w-7xl mx-auto px-6">
 
@@ -416,7 +426,7 @@ tailwind.config = {
 
 <!-- ================= SOLUTION ================= -->
 
-<section id="solution" class="py-24 hero-bg">
+<section id="solution" class="py-16 hero-bg">
 
   <div class="max-w-7xl mx-auto px-6">
 
@@ -638,7 +648,7 @@ tailwind.config = {
 
 <!-- ================= FAQ ================= -->
 
-<section id="faq" class="py-28 bg-white dark:bg-slate-950">
+<section id="faq" class="py-16 bg-white dark:bg-slate-950">
 
   <div class="max-w-5xl mx-auto px-6">
 
@@ -718,19 +728,15 @@ tailwind.config = {
 
 <!-- ================= BOOK DEMO ================= -->
 
-<section id="demo" class="py-28 hero-bg">
+<section id="demo" class="py-16 hero-bg">
 
   <div class="max-w-7xl mx-auto px-6">
 
     <div class="max-w-4xl mx-auto text-center">
       <span class="inline-flex px-5 py-2 rounded-full bg-blue-100 dark:bg-slate-800 text-primary font-semibold">Book a Personalized Demo</span>
-      <h2 class="mt-6 text-3xl lg:text-6xl font-extrabold">Book a Personalized Demo</h2>
-      <p class="mt-6 text-xl text-slate-600 dark:text-slate-400 leading-9">
-        See how ConciergeOS can automate your business with a custom AI receptionist.
-      </p>
     </div>
 
-    <div class="max-w-5xl mx-auto mt-16">
+    <div class="max-w-5xl mx-auto mt-8">
       <div class="demo-card dark:bg-slate-950">
 
         <div class="booking-header">
@@ -756,7 +762,7 @@ tailwind.config = {
 
 <footer class="bg-slate-950 text-white">
 
-  <div class="max-w-7xl mx-auto px-6 py-20">
+  <div class="max-w-7xl mx-auto px-6 py-16">
 
     <div class="grid lg:grid-cols-3 gap-14">
 
@@ -810,6 +816,12 @@ tailwind.config = {
   </div>
 
 </footer>
+
+
+
+<!-- ElevenLabs Voice Widget (floating) -->
+<elevenlabs-convai agent-id="agent_9901kxjk0352fnm8nkvk6zvzgdy2"></elevenlabs-convai>
+<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 
 <!-- Main JavaScript -->
 <script src="main.js" defer></script>

@@ -50,6 +50,19 @@ body {
 }
 
 /* ============================================================
+   MOBILE MENU
+============================================================ */
+
+#mobileMenu:not(.hidden) {
+  animation: mobileMenuIn 0.2s ease-out;
+}
+
+@keyframes mobileMenuIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
    ANIMATIONS
 ============================================================ */
 
