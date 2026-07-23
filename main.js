@@ -36,15 +36,24 @@ function getChatKitOptions(colorScheme) {
       density: 'spacious',
     },
     startScreen: {
-      greeting: 'Welcome to ConciergeOS! I\u2019m your AI concierge. I can help with reservations, bookings, guest inquiries, customer support, and business automation. How can I assist you today?',
+      greeting: "Welcome to ConciergeOS! I'm your AI Receptionist. I can answer questions about ConciergeOS, explain how our AI Voice & Chat solutions can help your business, discuss workflow automation and integrations, or help you schedule a personalized demo. How can I assist you today?",
       prompts: [
-        { label: 'Book a Reservation',  prompt: 'I would like to make a reservation.' },
-        { label: 'Ask a Question',      prompt: 'I have a question about your services.' },
-        { label: 'Business Automation', prompt: 'Tell me how ConciergeOS can automate my business.' },
+        {
+          label: "Learn About ConciergeOS",
+          prompt: "What is ConciergeOS and how can it help my business?"
+        },
+        {
+          label: "Explore AI Solutions",
+          prompt: "Tell me about your AI Voice Receptionists, AI Chat Assistants, and business automation solutions."
+        },
+        {
+          label: "Book a Personalized Demo",
+          prompt: "I'd like to schedule a personalized demo for my business."
+        },
       ],
     },
     composer: {
-      placeholder: 'Ask about reservations, AI automation, or customer support...',
+      placeholder: "Ask about AI receptionists, business automation, integrations, or book a demo...",
     },
   };
 }
