@@ -773,6 +773,7 @@ tailwind.config = {
 
     <div class="text-center">
       <p class="text-slate-500">© 2026 ConciergeOS. All rights reserved.</p>
+      <p class="mt-4 text-slate-400"><a href="mailto:connect@getconciergeos.com" class="hover:text-white transition">connect@getconciergeos.com</a></p>
     </div>
 
   </div>
@@ -785,10 +786,11 @@ tailwind.config = {
 <elevenlabs-convai agent-id="agent_9901kxjk0352fnm8nkvk6zvzgdy2"></elevenlabs-convai>
 <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 
-<!-- Runtime environment config (no secrets — keys are server-side) -->
+<!-- Runtime environment config -->
 <script>
 window.__CONCIERGE_ENV = {
   API_URL:           '/api/chat',   // Proxied through backend
+  DOMAIN_KEY:        'domain_pk_6a548ff4ce248197a246458c6713e8c70dadf08d8f890c9d', // Publishable key (safe client-side)
   CALENDLY_BASE_URL: 'https://calendly.com/mohammadtahakhan20/30min',
 };
 </script>

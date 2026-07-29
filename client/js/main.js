@@ -6,7 +6,7 @@
 if (!window.__CONCIERGE_ENV) {
   throw new Error('Missing window.__CONCIERGE_ENV — check the <script> block in index.html.');
 }
-const { API_URL, CALENDLY_BASE_URL } = window.__CONCIERGE_ENV;
+const { API_URL, DOMAIN_KEY, CALENDLY_BASE_URL } = window.__CONCIERGE_ENV;
 
 const customFetch = (url, options = {}) => {
   // Rewrite requests to go through our backend proxy (key is injected server-side)
@@ -26,8 +26,9 @@ const customFetch = (url, options = {}) => {
 function getChatKitOptions(colorScheme) {
   return {
     api: {
-      url:   API_URL,
-      fetch: customFetch,
+      url:       API_URL,
+      domainKey: DOMAIN_KEY,
+      fetch:     customFetch,
     },
     theme: {
       colorScheme: colorScheme,
