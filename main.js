@@ -1,10 +1,9 @@
 /* ============================================================
    CONFIGURATION
+   Loaded from config.js (gitignored). See config.example.js.
 ============================================================ */
 
-const DOMAIN_KEY        = 'domain_pk_6a548ff4ce248197a246458c6713e8c70dadf08d8f890c9d';
-const API_URL           = 'https://openai.secondbrainos.com/chatkit';
-const CALENDLY_BASE_URL = 'https://calendly.com/mohammadtahakhan20/30min';
+const { DOMAIN_KEY, API_URL, CALENDLY_BASE_URL } = window.__CONCIERGE_ENV;
 
 const customFetch = (url, options = {}) => {
   return fetch(url, {
