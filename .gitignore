@@ -1,21 +1,33 @@
-# Environment / secrets
-config.js
+# ===== Environment / secrets =====
 .env
 .env.*
+server/.env
 
-# OS files
+# ===== Legacy root-level files (now live in client/) =====
+/index.html
+/main.js
+/styles.css
+/config.js
+/config.example.js
+/public/
+
+# ===== OS files =====
 .DS_Store
 Thumbs.db
 
-# Editor
+# ===== Editor =====
 .vscode/
 .idea/
 *.swp
 *.swo
 
-# Dependencies
+# ===== Dependencies =====
 node_modules/
 
-# Build output
+# ===== Build output =====
 dist/
 build/
+
+# ===== Logs =====
+*.log
+npm-debug.log*

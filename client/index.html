@@ -62,7 +62,7 @@ tailwind.config = {
 <script>(function(){var t=localStorage.getItem('theme')||'light';if(t==='dark')document.documentElement.classList.add('dark');}());</script>
 
 <!-- Site styles -->
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="css/styles.css">
 
 </head>
 
@@ -80,7 +80,7 @@ tailwind.config = {
       <div class="h-20 flex items-center justify-between">
 
         <a href="#" class="flex items-center gap-4">
-            <img src="ConciergeOS Logo.png" alt="ConciergeOS Logo" width="36" height="36" style="border-radius:16px;object-fit:contain;">
+            <img src="assets/ConciergeOS Logo.png" alt="ConciergeOS Logo" width="36" height="36" style="border-radius:16px;object-fit:contain;">
           <div>
             <span class="font-bold text-xl block">ConciergeOS</span>
             <p class="text-xs text-slate-500 dark:text-slate-400">AI Receptionists</p>
@@ -581,7 +581,7 @@ tailwind.config = {
         <div class="integration-pill"><img loading="lazy" src="https://cdn.simpleicons.org/calendly" alt="Calendly"><span>Calendly</span></div>
         <div class="integration-pill"><img loading="lazy" src="https://cdn.simpleicons.org/googlecalendar" alt="Google Calendar"><span>Google Calendar</span></div>
         <div class="integration-pill"><img loading="lazy" src="https://cdn.simpleicons.org/gmail" alt="Gmail"><span>Gmail</span></div>
-        <div class="integration-pill"><img loading="lazy" src="MicrosoftOutlook.png" alt="Outlook"><span>Outlook</span></div>
+        <div class="integration-pill"><img loading="lazy" src="assets/MicrosoftOutlook.png" alt="Outlook"><span>Outlook</span></div>
         <div class="integration-pill"><img loading="lazy" src="https://cdn.simpleicons.org/whatsapp" alt="WhatsApp"><span>WhatsApp</span></div>
 
         <!-- Duplicated for seamless infinite loop -->
@@ -591,7 +591,7 @@ tailwind.config = {
         <div class="integration-pill"><img loading="lazy" src="https://cdn.simpleicons.org/calendly" alt="Calendly"><span>Calendly</span></div>
         <div class="integration-pill"><img loading="lazy" src="https://cdn.simpleicons.org/googlecalendar" alt="Google Calendar"><span>Google Calendar</span></div>
         <div class="integration-pill"><img loading="lazy" src="https://cdn.simpleicons.org/gmail" alt="Gmail"><span>Gmail</span></div>
-        <div class="integration-pill"><img loading="lazy" src="MicrosoftOutlook.png" alt="Outlook"><span>Outlook</span></div>
+        <div class="integration-pill"><img loading="lazy" src="assets/MicrosoftOutlook.png" alt="Outlook"><span>Outlook</span></div>
         <div class="integration-pill"><img loading="lazy" src="https://cdn.simpleicons.org/whatsapp" alt="WhatsApp"><span>WhatsApp</span></div>
 
       </div>
@@ -731,7 +731,7 @@ tailwind.config = {
       <!-- Brand -->
       <div>
         <div class="flex items-center gap-4">
-          <img src="ConciergeOS Logo.png" alt="ConciergeOS Logo" width="36" height="36" style="border-radius:10px;object-fit:contain;">
+          <img src="assets/ConciergeOS Logo.png" alt="ConciergeOS Logo" width="36" height="36" style="border-radius:10px;object-fit:contain;">
           <div>
             <h2 class="text-2xl font-bold">ConciergeOS</h2>
             <p class="text-slate-400">AI Receptionists</p>
@@ -785,11 +785,16 @@ tailwind.config = {
 <elevenlabs-convai agent-id="agent_9901kxjk0352fnm8nkvk6zvzgdy2"></elevenlabs-convai>
 <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 
-<!-- Runtime config (gitignored — holds API keys) -->
-<script src="config.js"></script>
+<!-- Runtime environment config (no secrets — keys are server-side) -->
+<script>
+window.__CONCIERGE_ENV = {
+  API_URL:           '/api/chat',   // Proxied through backend
+  CALENDLY_BASE_URL: 'https://calendly.com/mohammadtahakhan20/30min',
+};
+</script>
 
 <!-- Main JavaScript -->
-<script src="main.js" defer></script>
+<script src="js/main.js" defer></script>
 
 </body>
 </html>

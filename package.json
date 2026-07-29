@@ -1,0 +1,19 @@
+{
+  "name": "conciergeos",
+  "version": "1.0.0",
+  "description": "ConciergeOS — AI Receptionists for Modern Businesses",
+  "private": true,
+  "scripts": {
+    "install:server": "cd server && npm install",
+    "start": "cd server && npm start",
+    "dev": "cd server && npm run dev",
+    "postinstall": "npm run install:server"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/ConciergeOS.git"
+  }
+}
