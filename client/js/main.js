@@ -223,9 +223,9 @@ function applyTheme(theme) {
   }
 
   // Re-apply ChatKit theme (colorScheme + shadow DOM overrides)
-  const chat = document.getElementById('chat');
-  if (chat && typeof chat.setOptions === 'function') {
-    chat.setOptions(getChatKitOptions(theme));
+  const chatkit = document.querySelector('openai-chatkit');
+  if (chatkit && typeof chatkit.setOptions === 'function') {
+    chatkit.setOptions(getChatKitOptions(theme));
     customizeChatKit(theme);
   }
 
