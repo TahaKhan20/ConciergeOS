@@ -6,7 +6,7 @@
 if (!window.__CONCIERGE_ENV) {
   throw new Error('Missing window.__CONCIERGE_ENV — check the <script> block in index.html.');
 }
-const { API_URL, DOMAIN_KEY, CALENDLY_BASE_URL } = window.__CONCIERGE_ENV;
+const { API_URL, CALENDLY_BASE_URL } = window.__CONCIERGE_ENV;
 
 const customFetch = (url, options = {}) => {
   // Rewrite requests to go through our backend proxy (key is injected server-side)
@@ -26,9 +26,8 @@ const customFetch = (url, options = {}) => {
 function getChatKitOptions(colorScheme) {
   return {
     api: {
-      url:       API_URL,
-      domainKey: DOMAIN_KEY,
-      fetch:     customFetch,
+      url:   API_URL,
+      fetch: customFetch,
     },
     theme: {
       colorScheme: colorScheme,
@@ -224,9 +223,9 @@ function applyTheme(theme) {
   }
 
   // Re-apply ChatKit theme (colorScheme + shadow DOM overrides)
-  const chat = document.getElementById('chat');
-  if (chat && typeof chat.setOptions === 'function') {
-    chat.setOptions(getChatKitOptions(theme));
+  const chatkit = document.querySelector('openai-chatkit');
+  if (chatkit && typeof chatkit.setOptions === 'function') {
+    chatkit.setOptions(getChatKitOptions(theme));
     customizeChatKit(theme);
   }
 
