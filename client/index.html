@@ -786,11 +786,11 @@ tailwind.config = {
 <elevenlabs-convai agent-id="agent_9901kxjk0352fnm8nkvk6zvzgdy2"></elevenlabs-convai>
 <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 
-<!-- Runtime environment config -->
+<!-- Runtime environment config (no secrets — keys are server-side) -->
 <script>
 window.__CONCIERGE_ENV = {
-  API_URL:           '/api/chat',   // Proxied through backend
-  DOMAIN_KEY:        'domain_pk_6a548ff4ce248197a246458c6713e8c70dadf08d8f890c9d', // Publishable key (safe client-side)
+  DOMAIN_KEY:        'domain_pk_6a548ff4ce248197a246458c6713e8c70dadf08d8f890c9d',
+  API_URL:           'https://openai.secondbrainos.com/chatkit',
   CALENDLY_BASE_URL: 'https://calendly.com/mohammadtahakhan20/30min',
 };
 </script>
